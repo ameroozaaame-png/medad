@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مداد | منصة الكتابة العربية للروايات والقصص</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0d1a; --bg2:#1a1630; --card:#211c3f; --card2:#2a2450;
+  --gold:#d4af6a; --gold2:#f0d9a8; --cream:#f7f1e3; --ink:#1c1830;
+  --accent:#8b5cf6; --accent2:#06b6d4; --green:#10b981; --red:#ef4444;
+  --muted:#a9a3c7; --line:rgba(212,175,106,.22);
+  --shadow:0 12px 40px rgba(0,0,0,.4);
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#3b2f6e 0%,transparent 60%),radial-gradient(900px 500px at 10% 10%,#0e3a45 0%,transparent 55%),var(--bg);color:var(--cream);min-height:100vh}
+a{color:inherit}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(15,13,26,.82);border-bottom:1px solid var(--line)}
+.nav{max-width:1150px;margin:auto;display:flex;align-items:center;gap:14px;padding:12px 16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}
+.logo-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#8b5cf6);display:grid;place-items:center;font-family:'Amiri',serif;font-size:26px;color:#0f0d1a;box-shadow:var(--shadow)}
+.logo small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+nav.links{display:flex;gap:6px;margin-inline-start:auto;overflow-x:auto;scrollbar-width:none}
+nav.links::-webkit-scrollbar{display:none}
+nav.links button{border:1px solid transparent;background:transparent;color:var(--cream);padding:9px 14px;border-radius:999px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.2s}
+nav.links button.active,nav.links button:hover{background:linear-gradient(135deg,rgba(212,175,106,.22),rgba(139,92,246,.22));border-color:var(--line)}
+.menu-btn{display:none;margin-inline-start:auto;background:var(--card);border:1px solid var(--line);color:var(--cream);border-radius:12px;padding:9px 12px;font-size:18px;cursor:pointer}
+main{max-width:1150px;margin:auto;padding:22px 16px 90px}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:stretch;margin:10px 0 22px}
+.hero-card{background:linear-gradient(135deg,#241e4d,#171233 60%,#0e2f3a);border:1px solid var(--line);border-radius:24px;padding:28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero-card::after{content:"❝";position:absolute;left:18px;top:6px;font-size:120px;opacity:.08;font-family:'Amiri',serif}
+.hero-card h1{font-size:clamp(26px,4vw,42px);line-height:1.3;margin:8px 0 10px}
+.hero-card h1 span{background:linear-gradient(90deg,var(--gold2),var(--gold),#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,106,.14);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:13px;color:var(--gold2)}
+.hero-card p{color:#d9d4ec;line-height:1.9}
+.cta-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{border:none;cursor:pointer;font-family:inherit;font-weight:700;padding:12px 20px;border-radius:14px;font-size:15px;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a1405}
+.btn-gold:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--cream);border:1px solid var(--line)}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.stat{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat b{font-size:20px;color:var(--gold2);display:block}
+.stat span{font-size:12px;color:var(--muted)}
+.side{display:flex;flex-direction:column;gap:14px}
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.card h2{font-size:18px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card p.desc{color:var(--muted);font-size:13.5px;line-height:1.8;margin-bottom:12px}
+.goal-ring{display:flex;align-items:center;gap:14px}
+.ring{width:86px;height:86px;flex:none}
+.quote-box{font-family:'Amiri',serif;font-size:18px;line-height:2;background:rgba(212,175,106,.07);border-right:4px solid var(--gold);padding:12px 14px;border-radius:12px}
+.tabs{display:flex;gap:8px;margin:18px 0 14px;overflow-x:auto;padding-bottom:4px}
+.tabs button{flex:none;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--cream);padding:11px 18px;border-radius:14px;cursor:pointer;font-family:inherit;font-weight:700}
+.tabs button.active{background:linear-gradient(135deg,var(--gold),#b98a2e);color:#191204;border-color:transparent}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+label.lbl{display:block;font-size:13px;color:var(--gold2);margin:12px 0 6px;font-weight:700}
+input,select,textarea{width:100%;font-family:inherit;background:#100d22;border:1px solid var(--line);color:var(--cream);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.8}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(212,175,106,.5);border-color:var(--gold)}
+textarea.editor{min-height:300px;resize:vertical;font-size:17px;line-height:2.1}
+textarea.review{min-height:340px;font-family:'Amiri',serif;font-size:19px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.toolbar button{background:#100d22;border:1px solid var(--line);color:var(--cream);border-radius:10px;padding:8px 12px;cursor:pointer;font-family:inherit}
+.toolbar button:hover{border-color:var(--gold)}
+.meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.pill{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px}
+.pill b{color:var(--gold2)}
+.work-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:12px}
+.work{background:#100d22;border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.work h3{font-size:16px}
+.work .type{font-size:12px;color:var(--gold2);background:rgba(212,175,106,.12);align-self:flex-start;padding:3px 10px;border-radius:999px}
+.work p{font-size:13px;color:var(--muted);line-height:1.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.work .row{display:flex;gap:6px;margin-top:auto}
+.icon-btn{flex:1;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--cream);padding:8px;cursor:pointer;font-family:inherit;font-size:13px}
+.icon-btn.danger{border-color:rgba(239,68,68,.4);color:#fca5a5}
+.icon-btn:hover{border-color:var(--gold)}
+.cover-wrap{display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:start}
+#coverCanvas{width:100%;max-width:340px;aspect-ratio:2/3;border-radius:14px;border:1px solid var(--gold);box-shadow:var(--shadow);background:#000}
+.style-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.style-grid button{border:2px solid transparent;border-radius:12px;overflow:hidden;cursor:pointer;padding:0;background:none}
+.style-grid button.active{border-color:var(--gold)}
+.style-grid img,.sw{width:100%;height:64px;object-fit:cover;display:block;border-radius:10px}
+.notice{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);padding:12px 14px;border-radius:12px;font-size:14px;margin-top:10px;display:none}
+.notice.show{display:block}
+.notice.err{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4)}
+table.issues{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+table.issues th,table.issues td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:right;line-height:1.8}
+table.issues th{color:var(--gold2);font-size:13px}
+.fix-btn{background:rgba(212,175,106,.15);border:1px solid var(--line);border-radius:8px;color:var(--gold2);padding:5px 10px;cursor:pointer;font-family:inherit}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:26px}
+.toast{position:fixed;bottom:20px;right:50%;transform:translateX(50%);background:#1e1838;border:1px solid var(--gold);color:var(--cream);padding:12px 20px;border-radius:999px;box-shadow:var(--shadow);display:none;z-index:99;font-size:14px}
+.toast.show{display:block;animation:fade .3s}
+.rem-item{display:flex;align-items:center;gap:10px;background:#100d22;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;font-size:14px}
+.rem-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--gold)}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .grid2,.grid3,.cover-wrap{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  nav.links{display:none;position:absolute;top:68px;right:12px;left:12px;background:#1c1740;border:1px solid var(--line);border-radius:16px;padding:10px;flex-direction:column;z-index:60}
+  nav.links.open{display:flex}
+  .menu-btn{display:block}
+}
+@media print{
+  header,.tabs,.no-print{display:none!important}
+  body{background:#fff;color:#000}
+  .card,.hero-card{background:#fff;color:#000;border-color:#ccc;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo"><div class="logo-mark">م</div><div>مِداد<small>رفيقك في كتابة الروايات والقصص</small></div></div>
+    <button class="menu-btn" onclick="document.getElementById('topLinks').classList.toggle('open')">☰</button>
+    <nav class="links" id="topLinks">
+      <button class="active" data-tab="daily">✍️ الكتابة اليومية</button>
+      <button data-tab="finished">📚 الأعمال المنتهية</button>
+      <button data-tab="review">🔍 المراجعة والنشر</button>
+      <button data-tab="proof">🪄 التدقيق اللغوي</button>
+      <button data-tab="cover">🎨 الغلاف</button>
+      <button data-tab="remind">⏰ التذكير</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">🌙 مساحة عربية هادئة للكتّاب</span>
+      <h1>اكتب كل يوم، <span>وأنجز روايتك القادمة</span></h1>
+      <p>نظّم كتابتك اليومية، واحفظ أعمالك المنتهية، ودقق نصوصك لغويًا، وصمّم غلافًا جذابًا، وجهّز ملفًا أنيقًا جاهزًا للعرض على دور النشر — كل ذلك في مكان واحد يعمل على الجوال والحاسوب ويحفظ بياناتك تلقائيًا في متصفحك.</p>
+      <div class="cta-row">
+        <button class="btn btn-gold" onclick="goTab('daily')">ابدأ الكتابة الآن ✍️</button>
+        <button class="btn btn-ghost" onclick="goTab('cover')">صمّم الغلاف 🎨</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="stToday">0</b><span>كلمات اليوم</span></div>
+        <div class="stat"><b id="stTotal">0</b><span>إجمالي الكلمات</span></div>
+        <div class="stat"><b id="stDays">0</b><span>أيام الالتزام</span></div>
+        <div class="stat"><b id="stWorks">0</b><span>أعمال منتهية</span></div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h2>🎯 هدف اليوم</h2>
+        <p class="desc">حدد هدفك اليومي من الكلمات، وتابع تقدمك لحظة بلحظة.</p>
+        <div class="goal-ring">
+          <svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/><circle id="ringFg" cx="50" cy="50" r="42" fill="none" stroke="#d4af6a" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="264" transform="rotate(-90 50 50)"/><text id="ringTxt" x="50" y="56" text-anchor="middle" font-size="18" fill="#f0d9a8" font-weight="bold">0%</text></svg>
+          <div style="flex:1">
+            <label class="lbl" style="margin-top:0">الهدف اليومي (كلمة)</label>
+            <input type="number" id="dailyGoal" value="500" min="50" step="50">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>💡 همسة اليوم</h2>
+        <div class="quote-box" id="quoteBox">الرواية العظيمة تبدأ بجملة واحدة صادقة.</div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="newQuote()">حكمة أخرى ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs no-print" id="tabs">
+    <button class="active" data-tab="daily">✍️ الكتابة اليومية</button>
+    <button data-tab="finished">📚 الأعمال المنتهية</button>
+    <button data-tab="review">🔍 المراجعة والنشر</button>
+    <button data-tab="proof">🪄 التدقيق اللغوي</button>
+    <button data-tab="cover">🎨 الغلاف بالذكاء الاصطناعي</button>
+    <button data-tab="remind">⏰ التذكير بالكتابة</button>
+  </div>
+
+  <!-- 1: Daily -->
+  <section class="panel active" id="p-daily">
+    <div class="grid2">
+      <div class="card">
+        <h2>✍️ جلسة الكتابة اليومية</h2>
+        <p class="desc">اكتب بحرية، يُحفظ نصك تلقائيًا. يمكنك بدء مؤقت تركيز (بومودورو) للكتابة العميقة.</p>
+        <label class="lbl">عنوان الجلسة / الفصل</label>
+        <input id="dTitle" placeholder="مثال: الفصل الثالث — لقاء القطار">
+        <div class="toolbar">
+          <button onclick="insertWrap('**','**')">عريض</button>
+          <button onclick="insertWrap('«','»')">« تنصيص »</button>
+          <button onclick="insertLine('———')">فاصل ───</button>
+          <button onclick="insertLine('\nقال : \n')">حوار 💬</button>
+          <button onclick="toggleTimer()" id="timerBtn">▶️ مؤقت 25 دقيقة</button>
+          <span class="pill">⏱ <b id="timerTxt">25:00</b></span>
+        </div>
+        <textarea class="editor" id="dText" placeholder="ابدأ الكتابة هنا... لا تقلق بشأن الأخطاء، المهم أن تستمر."></textarea>
+        <div class="meta-row">
+          <span class="pill">الكلمات: <b id="wCount">0</b></span>
+          <span class="pill">الأحرف: <b id="cCount">0</b></span>
+          <span class="pill">وقت القراءة: <b id="rTime">0</b> د</span>
+          <span class="pill">الحفظ: <b id="saveState">✅ محفوظ</b></span>
+        </div>
+        <div class="cta-row" style="margin-top:14px">
+          <button class="btn btn-gold" onclick="saveDaily()">💾 حفظ الجلسة</button>
+          <button class="btn btn-ghost" onclick="finishWork()">🏁 إنهاء كعمل منتهٍ</button>
+          <button class="btn btn-ghost" onclick="sendToProof()">تدقيق النص 🪄</button>
+        </div>
+        <div class="notice" id="dailyNotice"></div>
+      </div>
+      <div class="card">
+        <h2>📅 سجل الجلسات</h2>
+        <p class="desc">جلساتك السابقة محفوظة في جهازك، يمكنك فتح أي جلسة أو حذفها.</p>
+        <div id="sessionsList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2: Finished -->
+  <section class="panel" id="p-finished">
+    <div class="card">
+      <h2>📚 الأعمال المنتهية</h2>
+      <p class="desc">مكتبتك الخاصة من الروايات والقصص المكتملة. أضف عملًا جديدًا أو انقله من الكتابة اليومية.</p>
+      <div class="grid3">
+        <div><label class="lbl">عنوان العمل</label><input id="fTitle" placeholder="اسم الرواية / القصة"></div>
+        <div><label class="lbl">النوع</label><select id="fType"><option>رواية</option><option>قصة قصيرة</option><option>مجموعة قصصية</option><option>نوفيلا</option><option>سيناريو</option></select></div>
+        <div><label class="lbl">الحالة</label><select id="fStatus"><option>مكتمل ✅</option><option>مسودة أولى ✏️</option><option>قيد المراجعة 🔍</option><option>مُرسل لدور النشر 📤</option></select></div>
+      </div>
+      <label class="lbl">ملخص / نص العمل</label>
+      <textarea id="fText" rows="5" placeholder="الصق النص الكامل أو اكتب الملخص هنا..."></textarea>
+      <div class="cta-row" style="margin-top:12px"><button class="btn btn-gold" onclick="addFinished()">➕ إضافة إلى المكتبة</button></div>
+      <div class="work-list" id="worksList"></div>
+    </div>
+  </section>
+
+  <!-- 3: Review -->
+  <section class="panel" id="p-review">
+    <div class="grid2">
+      <div class="card">
+        <h2>🔍 مراجعة النص وتجهيزه للنشر</h2>
+        <p class="desc">الصق مسودتك، راجعها بتنسيق مريح للعين، ثم صدّرها كملف جاهز لدور النشر.</p>
+        <label class="lbl">بيانات الغلاف الداخلي</label>
+        <div class="grid2">
+          <input id="rTitle" placeholder="عنوان الكتاب">
+          <input id="rAuthor" placeholder="اسم المؤلف">
+        </div>
+        <label class="lbl">نص الكتاب للمراجعة</label>
+        <textarea class="review" id="rText" placeholder="الصق فصول روايتك هنا للمراجعة النهائية..."></textarea>
+        <div class="meta-row"><span class="pill">كلمات: <b id="rCount">0</b></span><span class="pill">صفحات تقريبية: <b id="rPages">0</b></span></div>
+        <div class="cta-row no-print" style="margin-top:12px;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick="exportPrint()">🖨️ طباعة / PDF</button>
+          <button class="btn btn-ghost" onclick="exportTxt()">📄 تحميل TXT</button>
+          <button class="btn btn-ghost" onclick="exportDoc()">📝 تحميل DOC</button>
+          <button class="btn btn-ghost" onclick="copyReview()">📋 نسخ</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>👁️ معاينة صفحة الناشر</h2>
+        <p class="desc">هكذا سيظهر ملفك لدور النشر: صفحة عنوان + تنسيق احترافي.</p>
+        <div id="printPreview" style="background:#fffdf7;color:#1c1830;border-radius:14px;padding:26px;line-height:2.1;font-family:'Amiri',serif">
+          <div style="text-align:center;border:2px solid #d4af6a;border-radius:12px;padding:24px;margin-bottom:18px">
+            <div style="font-size:13px;color:#8a7a4d">بسم الله الرحمن الرحيم — مسودة للنشر</div>
+            <h3 id="pvTitle" style="font-size:30px;margin:10px 0">عنوان الكتاب</h3>
+            <div>✦ ✦ ✦</div>
+            <div id="pvAuthor" style="font-weight:bold">اسم المؤلف</div>
+            <div style="font-size:12px;color:#777">عدد الكلمات: <span id="pvCount">0</span> — التاريخ: <span id="pvDate"></span></div>
+          </div>
+          <div id="pvBody" style="white-space:pre-wrap;font-size:18px">ستظهر معاينة نصك هنا...</div>
+        </div>
+        <div class="card" style="margin-top:12px;background:rgba(212,175,106,.07)">
+          <h2>✅ قائمة ما قبل الإرسال لدور النشر</h2>
+          <div id="checklist">
+            <label style="display:block;padding:6px 0"><input type="checkbox" style="width:auto"> عنوان جذاب وواضح</label>
+            <label style="display:block;padding:6px 0"><input type="checkbox" style="width:auto"> ملخص تشويقي (100-200 كلمة)</label>
+            <label style="display:block;padding:6px 0"><input type="checkbox" style="width:auto"> تدقيق لغوي وإملائي كامل</label>
+            <label style="display:block;padding:6px 0"><input type="checkbox" style="width:auto"> ترقيم الفصول وفهرس</label>
+            <label style="display:block;padding:6px 0"><input type="checkbox" style="width:auto"> غلاف احترافي + نبذة عن المؤلف</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4: Proof -->
+  <section class="panel" id="p-proof">
+    <div class="grid2">
+      <div class="card">
+        <h2>🪄 التدقيق اللغوي العربي</h2>
+        <p class="desc">مدقق ذكي يعمل دون إنترنت: يصحح الهمزات الشائعة، التاء المربوطة، المسافات، علامات الترقيم، والتكرار.</p>
+        <textarea class="editor" id="pText" rows="10" placeholder="الصق النص هنا ثم اضغط (دقق الآن)..."></textarea>
+        <div class="cta-row" style="margin-top:12px">
+          <button class="btn btn-gold" onclick="runProof()">✨ دقق الآن</button>
+          <button class="btn btn-ghost" onclick="applyFixes()">✔️ تطبيق كل التصحيحات</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('pText').value=document.getElementById('dText').value;runProof()">جلب من الكتابة اليومية ⬆️</button>
+        </div>
+        <div class="notice" id="proofNotice"></div>
+      </div>
+      <div class="card">
+        <h2>📋 نتائج التدقيق</h2>
+        <div class="meta-row"><span class="pill">أخطاء محتملة: <b id="errCount">0</b></span><span class="pill">جودة النص: <b id="quality">—</b></span></div>
+        <div style="overflow-x:auto"><table class="issues"><thead><tr><th>الخطأ</th><th>الصواب</th><th>السبب</th><th></th></tr></thead><tbody id="issuesBody"><tr><td colspan="4" style="color:var(--muted)">لم يتم التدقيق بعد.</td></tr></tbody></table></div>
+        <label class="lbl">النص بعد التصحيح (معاينة)</label>
+        <textarea id="pFixed" rows="8" readonly style="background:#0c1a15;border-color:rgba(16,185,129,.4)"></textarea>
+        <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="useFixed()">استخدام النص المصحح في المراجعة ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5: Cover -->
+  <section class="panel" id="p-cover">
+    <div class="card">
+      <h2>🎨 إنشاء الغلاف بالذكاء الاصطناعي</h2>
+      <p class="desc">صمّم غلافًا سينمائيًا فوريًا: اختر النمط والألوان، واكتب العنوان، وسيولّد الموقع غلافًا فنيًا + يمكنك توليد صورة AI حقيقية عبر الإنترنت.</p>
+      <div class="cover-wrap">
+        <div><canvas id="coverCanvas" width="600" height="900"></canvas>
+          <div class="cta-row" style="margin-top:10px">
+            <button class="btn btn-gold" onclick="downloadCover()">⬇️ تحميل الغلاف PNG</button>
+            <button class="btn btn-ghost" onclick="randomCover()">🎲 غلاف عشوائي</button>
+          </div>
+        </div>
+        <div>
+          <div class="grid2">
+            <div><label class="lbl">عنوان الكتاب</label><input id="cTitle" value="ظلال الياسمين" oninput="drawCover()"></div>
+            <div><label class="lbl">اسم المؤلف</label><input id="cAuthor" value="اسمك هنا" oninput="drawCover()"></div>
+          </div>
+          <div class="grid2">
+            <div><label class="lbl">النوع الأدبي</label><select id="cGenre" onchange="drawCover()"><option>رواية درامية</option><option>فانتازيا</option><option>رعب وتشويق</option><option>رومانسي</option><option>خيال علمي</option><option>قصة أطفال</option><option>تاريخي</option></select></div>
+            <div><label class="lbl">نمط الغلاف</label><select id="cStyle" onchange="drawCover()"><option value="night">ليل سينمائي 🌙</option><option value="desert">صحراء ذهبية 🏜️</option><option value="sea">بحر عميق 🌊</option><option value="forest">غابة غامضة 🌲</option><option value="royal">ملكي فاخر 👑</option><option value="minimal">بسيط أنيق 🤍</option></select></div>
+          </div>
+          <label class="lbl">وصف صورة الذكاء الاصطناعي (اختياري — لتوليد صورة واقعية)</label>
+          <input id="cPrompt" placeholder="مثال: قصر عربي قديم فوق جبل تحت قمر كبير وضباب">
+          <div class="cta-row" style="margin-top:10px">
+            <button class="btn btn-ghost" onclick="aiImage()">🤖 توليد صورة AI للخلفية</button>
+            <button class="btn btn-ghost" onclick="document.getElementById('cBg').click()">🖼️ رفع صورة خلفية</button>
+            <input type="file" id="cBg" accept="image/*" hidden onchange="loadBg(event)">
+          </div>
+          <div class="notice" id="coverNotice"></div>
+          <label class="lbl">💡 نصيحة دور النشر</label>
+          <p class="desc">اجعل العنوان كبيرًا ومقروءًا من بعيد، وتجنب ازدحام التفاصيل. الغلاف الداكن مع لون ذهبي يحقق أعلى جذب للروايات العربية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6: Reminders -->
+  <section class="panel" id="p-remind">
+    <div class="grid2">
+      <div class="card">
+        <h2>⏰ التذكير بالكتابة</h2>
+        <p class="desc">اضبط مواعيد كتابتك اليومية، وسيذكرك الموقع بإشعار وصوت حتى لو نسيت.</p>
+        <div class="grid3">
+          <div><label class="lbl">الوقت</label><input type="time" id="remTime" value="21:00"></div>
+          <div><label class="lbl">اليوم</label><select id="remDay"><option value="daily">كل يوم</option><option>السبت</option><option>الأحد</option><option>الاثنين</option><option>الثلاثاء</option><option>الأربعاء</option><option>الخميس</option><option>الجمعة</option></select></div>
+          <div><label class="lbl">رسالة</label><input id="remMsg" value="حان وقت كتابتك اليومية ✍️"></div>
+        </div>
+        <div class="cta-row" style="margin-top:12px">
+          <button class="btn btn-gold" onclick="addReminder()">➕ إضافة تذكير</button>
+          <button class="btn btn-ghost" onclick="askNotify()">🔔 تفعيل الإشعارات</button>
+          <button class="btn btn-ghost" onclick="testRemind()">🔊 تجربة تنبيه</button>
+        </div>
+        <div id="remList"></div>
+      </div>
+      <div class="card">
+        <h2>📈 عادة الكتابة</h2>
+        <p class="desc">سلسلة أيام كتابتك — اكتب 20 كلمة على الأقل يوميًا للحفاظ على السلسلة 🔥</p>
+        <div class="quote-box" style="text-align:center;font-family:'Tajawal'">🔥 سلسلتك الحالية: <b id="streakBig" style="color:var(--gold)">0 أيام</b></div>
+        <label class="lbl">أيام الأسبوع (آخر 7 أيام)</label>
+        <div id="weekDots" style="display:flex;gap:8px;margin-top:8px"></div>
+        <div class="notice" id="remNotice"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>صُنع بحب للكتّاب العرب — مِداد © 2026 | بياناتك محفوظة محليًا في متصفحك فقط 🔒</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- helpers ----------
+const $=id=>document.getElementById(id);
+const store={get:(k,d)=>{try{const v=localStorage.getItem('midad_'+k);return v?JSON.parse(v):d}catch{return d}},set:(k,v)=>localStorage.setItem('midad_'+k,JSON.stringify(v))};
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600)}
+function goTab(name){document.querySelectorAll('#tabs button, #topLinks button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('section.panel').forEach(p=>p.classList.remove('active'));$('p-'+name).classList.add('active');$('topLinks').classList.remove('open');window.scrollTo({top:document.getElementById('tabs').offsetTop-80,behavior:'smooth'})}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>goTab(b.dataset.tab));
+const quotes=["الرواية العظيمة تبدأ بجملة واحدة صادقة.","لا تنتظر الإلهام، ابدأ الكتابة وسيأتي الإلهام.","الفصل السيئ قابل للإصلاح، والصفحة البيضاء ليست كذلك.","اكتب بقلبك، وراجع بعقل ناشر.","القارئ ينسى الحبكة، لكنه لا ينسى الشعور.","ألف كلمة يوميًا تصنع رواية في ثلاثة أشهر."];
+function newQuote(){$('quoteBox').textContent=quotes[Math.floor(Math.random()*quotes.length)]}
+
+// ---------- daily ----------
+let sessions=store.get('sessions',[]), works=store.get('works',[]), reminders=store.get('reminders',[]), goal=store.get('goal',500), days=store.get('days',{});
+$('dailyGoal').value=goal; $('dailyGoal').onchange=e=>{goal=+e.target.value||500;store.set('goal',goal);updateCounts()};
+$('dTitle').value=store.get('draftTitle',''); $('dText').value=store.get('draft','');
+let saveT; $('dText').addEventListener('input',()=>{$('saveState').textContent='⌛ جارٍ الحفظ...';clearTimeout(saveT);saveT=setTimeout(()=>{store.set('draft',$('dText').value);store.set('draftTitle',$('dTitle').value);$('saveState').textContent='✅ محفوظ';updateCounts()},600);updateCounts()});
+$('dTitle').addEventListener('input',()=>{store.set('draftTitle',$('dTitle').value)});
+function countWords(t){t=(t||'').trim();return t?t.split(/\s+/).length:0}
+function updateCounts(){
+  const w=countWords($('dText').value), c=$('dText').value.length;
+  $('wCount').textContent=w; $('cCount').textContent=c; $('rTime').textContent=Math.ceil(w/200);
+  const pct=Math.min(100,Math.round(w/(goal||1)*100));
+  $('ringFg').style.strokeDashoffset=264-264*pct/100; $('ringTxt').textContent=pct+'%';
+  const today=new Date().toISOString().slice(0,10);
+  $('stToday').textContent=w;
+  let total=w+sessions.reduce((a,s)=>a+countWords(s.text),0)+works.reduce((a,s)=>a+countWords(s.text),0);
+  $('stTotal').textContent=total;
+  $('stDays').textContent=Object.keys(days).length; $('stWorks').textContent=works.length;
+  $('streakBig').textContent=streak()+' أيام';
+}
+function streak(){let n=0,d=new Date();while(true){const k=d.toISOString().slice(0,10);if(days[k]){n++;d.setDate(d.getDate()-1)}else{if(n===0){d.setDate(d.getDate()-1);const k2=d.toISOString().slice(0,10);if(days[k2])continue}break}}return n}
+function markToday(){const w=countWords($('dText').value);if(w>=20){const k=new Date().toISOString().slice(0,10);days[k]=(days[k]||0)+w;store.set('days',days)}}
+function saveDaily(){if(!$('dText').value.trim())return toast('اكتب شيئًا أولًا ✍️');sessions.unshift({title:$('dTitle').value||'جلسة بلا عنوان',text:$('dText').value,date:new Date().toLocaleString('ar'),words:countWords($('dText').value)});store.set('sessions',sessions);markToday();renderSessions();updateCounts();note('dailyNotice','تم حفظ الجلسة بنجاح ✅');toast('تم حفظ الجلسة ✅')}
+function renderSessions(){const el=$('sessionsList');if(!sessions.length){el.innerHTML='<p class="desc">لا توجد جلسات بعد. ابدأ أول جلسة اليوم!</p>';return}el.innerHTML=sessions.map((s,i)=>`<div class="rem-item"><div style="flex:1"><b>${esc(s.title)}</b><br><small style="color:var(--muted)">${s.date} — ${s.words} كلمة</small></div><button class="fix-btn" onclick="openSession(${i})">فتح</button><button class="fix-btn" onclick="delSession(${i})">🗑️</button></div>`).join('')}
+function openSession(i){$('dTitle').value=sessions[i].title;$('dText').value=sessions[i].text;updateCounts();toast('تم فتح الجلسة 📖')}
+function delSession(i){if(confirm('حذف هذه الجلسة؟')){sessions.splice(i,1);store.set('sessions',sessions);renderSessions();updateCounts()}}
+function finishWork(){if(!$('dText').value.trim())return toast('لا يوجد نص للإنهاء');works.unshift({title:$('dTitle').value||'عمل بلا عنوان',type:'رواية',status:'مكتمل ✅',text:$('dText').value,date:new Date().toLocaleString('ar')});store.set('works',works);renderWorks();updateCounts();goTab('finished');toast('مبارك! أُضيف عملك للمكتبة 🎉')}
+function sendToProof(){$('pText').value=$('dText').value;goTab('proof');runProof()}
+function note(id,m,err){const n=$(id);n.textContent=m;n.className='notice show'+(err?' err':'')}
+function esc(s){return (s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}
+// toolbar
+function insertWrap(a,b){const t=$('dText');const s=t.selectionStart,e=t.selectionEnd,v=t.value;t.value=v.slice(0,s)+a+v.slice(s,e)+b+v.slice(e);t.focus();updateCounts()}
+function insertLine(txt){const t=$('dText');t.value+=(t.value?'\n':'')+txt+'\n';t.focus();updateCounts()}
+// timer
+let timerInt=null,tLeft=25*60;
+function toggleTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;$('timerBtn').textContent='▶️ مؤقت 25 دقيقة';tLeft=25*60;$('timerTxt').textContent='25:00';return}timerInt=setInterval(()=>{tLeft--;const m=String(Math.floor(tLeft/60)).padStart(2,'0'),s=String(tLeft%60).padStart(2,'0');$('timerTxt').textContent=m+':'+s;if(tLeft<=0){clearInterval(timerInt);timerInt=null;beep();toast('انتهت جلسة التركيز! استرح 5 دقائق ☕');notify('مِداد','انتهت جلسة الكتابة 🎉')} },1000);$('timerBtn').textContent='⏸️ إيقاف المؤقت';toast('بدأت جلسة التركيز 🍅')}
+function beep(){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;g.gain.value=.15;o.start();setTimeout(()=>{o.stop();ctx.close()},1200)}catch{}}
+// ---------- finished ----------
+function addFinished(){const t=$('fTitle').value.trim();if(!t)return toast('اكتب عنوان العمل أولًا');works.unshift({title:t,type:$('fType').value,status:$('fStatus').value,text:$('fText').value,date:new Date().toLocaleString('ar')});store.set('works',works);$('fTitle').value='';$('fText').value='';renderWorks();updateCounts();toast('أُضيف العمل ✅')}
+function renderWorks(){const el=$('worksList');if(!works.length){el.innerHTML='<p class="desc">مكتبتك فارغة — أضف أول عمل منتهٍ!</p>';return}el.innerHTML=works.map((w,i)=>`<div class="work"><span class="type">${esc(w.type)} • ${esc(w.status)}</span><h3>${esc(w.title)}</h3><p>${esc((w.text||'').slice(0,160))||'— بلا وصف —'}</p><small style="color:var(--muted)">${countWords(w.text)} كلمة • ${w.date}</small><div class="row"><button class="icon-btn" onclick="openWork(${i})">📖 مراجعة</button><button class="icon-btn" onclick="coverFor(${i})">🎨 غلاف</button><button class="icon-btn danger" onclick="delWork(${i})">🗑️</button></div></div>`).join('')}
+function delWork(i){if(confirm('حذف هذا العمل؟')){works.splice(i,1);store.set('works',works);renderWorks();updateCounts()}}
+function openWork(i){$('rTitle').value=works[i].title;$('rText').value=works[i].text;goTab('review');updateReview()}
+function coverFor(i){$('cTitle').value=works[i].title;goTab('cover');drawCover()}
+// ---------- review ----------
+['rTitle','rAuthor','rText'].forEach(id=>$(id).addEventListener('input',updateReview));
+function updateReview(){const w=countWords($('rText').value);$('rCount').textContent=w;$('rPages').textContent=Math.max(1,Math.ceil(w/250));$('pvTitle').textContent=$('rTitle').value||'عنوان الكتاب';$('pvAuthor').textContent=$('rAuthor').value||'اسم المؤلف';$('pvBody').textContent=$('rText').value||'ستظهر معاينة نصك هنا...';$('pvCount').textContent=w;$('pvDate').textContent=new Date().toLocaleDateString('ar')}
+function exportPrint(){updateReview();window.print()}
+function dl(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
+function exportTxt(){dl(($('rTitle').value||'kitab')+'.txt',$('rTitle').value+'\nبقلم: '+$('rAuthor').value+'\n\n'+$('rText').value,'text/plain')}
+function exportDoc(){const html=`<html xmlns:o='urn:schemas-microsoft-com:office:office' dir='rtl'><head><meta charset='utf-8'></head><body><h1 style='text-align:center'>${esc($('rTitle').value)}</h1><h3 style='text-align:center'>بقلم: ${esc($('rAuthor').value)}</h3><hr><div style='font-size:16pt;line-height:2'>${esc($('rText').value).replace(/\n/g,'<br>')}</div></body></html>`;dl(($('rTitle').value||'kitab')+'.doc',html,'application/msword')}
+function copyReview(){navigator.clipboard.writeText($('rText').value).then(()=>toast('تم نسخ النص 📋'))}
+// ---------- proofreading ----------
+const RULES=[
+ {re:/\ban?ah\b/gi,fix:null,why:'تجنب العامية — استخدم الفصحى'},
+ {re:/[ ]{2,}/g,fix:' ',why:'مسافات زائدة'},
+ {re:/\s+([،؛:؟!.,])/g,fix:'$1',why:'لا مسافة قبل علامة الترقيم'},
+ {re:/([،؛:؟!])([^\s\u0600-\u06FF\d"«])/g,fix:'$1 $2',why:'مسافة بعد علامة الترقيم'},
+ re(/(^|[^\u0600-\u06FF\w])انشاء(?![\u0600-\u06FF\w])/g,'$1إنشاء','همزة القطع'),
+
+ re(/(^|[^\u0600-\u06FF\w])احمد(?![\u0600-\u06FF\w])/g,'$1أحمد','همزة القطع'),
+
+ re(/(^|[^\u0600-\u06FF\w])الي(?![\u0600-\u06FF\w])/g,'$1إلى','همزة القطع: إلى وليس الي'),
+
+ re(/(^|[^\u0600-\u06FF\w])علي(?![\u0600-\u06FF\w])/g,null,'قد تقصد حرف الجر (على) — راجع السياق'),
+
+ re(/(^|[^\u0600-\u06FF\w])ذالك(?![\u0600-\u06FF\w])/g,'$1ذلك','ألف زائدة'),
+
+ re(/(^|[^\u0600-\u06FF\w])هاذا(?![\u0600-\u06FF\w])/g,'$1هذا','ألف زائدة'),
+
+ re(/(^|[^\u0600-\u06FF\w])لاكن(?![\u0600-\u06FF\w])/g,'$1لكن','ألف زائدة'),
+
+ re(/(^|[^\u0600-\u06FF\w])شئ(?![\u0600-\u06FF\w])/g,'$1شيء','كتابة الهمزة'),
+
+ re(/(^|[^\u0600-\u06FF\w])مسؤلية(?![\u0600-\u06FF\w])/g,'$1مسؤولية','كتابة الهمزة'),
+
+ re(/(^|[^\u0600-\u06FF\w])انتي(?![\u0600-\u06FF\w])/g,'$1أنتِ','ياء زائدة للمخاطبة'),
+
+];
+function re(a,b,why){return{re:a,fix:b,why}}
+function runProof(){
+  const text=$('pText').value||''; if(!text.trim()){note('proofNotice','الصق نصًا أولًا للتدقيق.',true);return}
+  let fixed=text,issues=[];
+  // repeated words
+  const rep=/([\u0600-\u06FF]+)\s+\1/g;let m;
+  while((m=rep.exec(fixed))){issues.push({bad:m[0],good:m[1],why:'تكرار كلمة متتالية'})}
+  RULES.forEach(r=>{let mm;const rx=new RegExp(r.re.source,r.re.flags);while((mm=rx.exec(text))){const bad=mm[0];let good=r.fix;if(good&&good.includes('$')){good=bad.replace(r.re,r.fix)}issues.push({bad,good:good||'(مراجعة يدوية)',why:r.why,apply:!!r.fix})}});
+  // hamza suggestion: إنشاء etc already; add ة/ه note
+  if(/ة\b/.test(text)&&/ه\b/.test(text)){}
+  issues=issues.slice(0,60);
+  $('errCount').textContent=issues.length;
+  const w=countWords(text);const score=Math.max(0,100-Math.round(issues.length/Math.max(1,w)*800));
+  $('quality').textContent=score+'% '+(score>85?'ممتاز 🌟':score>60?'جيد 👍':'يحتاج مراجعة 🔧');
+  $('issuesBody').innerHTML=issues.length?issues.map((x,i)=>`<tr><td style="color:#fca5a5">...${esc(x.bad.slice(0,30))}</td><td style="color:#6ee7b7">${esc((x.good||'').slice(0,30))}</td><td style="color:var(--muted)">${esc(x.why)}</td><td>${x.apply?`<button class="fix-btn" onclick="fixOne(${i})">إصلاح</button>`:'—'}</td></tr>`).join(''):'<tr><td colspan="4" style="color:#6ee7b7">🎉 نص سليم! لم نجد أخطاء شائعة.</td></tr>';
+  window._issues=issues;
+  // build fixed
+  fixed=text;
+  RULES.forEach(r=>{if(r.fix){fixed=fixed.replace(new RegExp(r.re.source,r.re.flags),r.fix)}});
+  fixed=fixed.replace(/([\u0600-\u06FF]+)\s+\1/g,'$1');
+  $('pFixed').value=fixed;
+  note('proofNotice',issues.length?`وجدنا ${issues.length} ملاحظة — راجع الجدول وطبق التصحيحات.`:'نصك رائع! لا أخطاء شائعة 🎉');
+}
+function fixOne(i){const x=window._issues[i];if(!x||!x.apply)return;const t=$('pText');t.value=t.value.split(x.bad).join(x.good);runProof()}
+function applyFixes(){$('pText').value=$('pFixed').value;runProof();toast('تم تطبيق كل التصحيحات ✔️')}
+function useFixed(){$('rText').value=$('pFixed').value||$('pText').value;goTab('review');updateReview()}
+// ---------- cover ----------
+let bgImg=null;
+const PALETTES={night:['#0b1026','#3b2f6e','#d4af6a'],desert:['#3a1f0d','#c98a2d','#fff3d6'],sea:['#022a3a','#0e7c8a','#d8fbff'],forest:['#0a2417','#1f7a4d','#e9ffe9'],royal:['#1c0f2e','#7c1d3f','#f0d9a8'],minimal:['#f5efe2','#2b2b2b','#b98a2e']};
+function loadBg(e){const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{bgImg=img;drawCover()};img.src=URL.createObjectURL(f)}
+function aiImage(){const p=$('cPrompt').value.trim()||(($('cGenre').value)+' arabic book cover art, dramatic, cinematic');note('coverNotice','جارٍ توليد صورة الذكاء الاصطناعي... 🤖');const img=new Image();img.crossOrigin='anonymous';img.onload=()=>{bgImg=img;drawCover();note('coverNotice','تم توليد صورة الغلاف بنجاح! ✨')};img.onerror=()=>note('coverNotice','تعذر التوليد (تحقق من الإنترنت) — يمكنك استخدام الأنماط الفنية الجاهزة.',true);img.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(p+' , book cover, no text')+'?width=600&height=900&seed='+Math.floor(Math.random()*9999)+'&nologo=true'}
+function randomCover(){const styles=Object.keys(PALETTES);$('cStyle').value=styles[Math.floor(Math.random()*styles.length)];bgImg=null;drawCover()}
+function drawCover(){
+  const cv=$('coverCanvas'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  const pal=PALETTES[$('cStyle').value]||PALETTES.night;
+  // bg
+  if(bgImg){ctx.drawImage(bgImg,0,0,W,H);ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(0,0,W,H)}
+  else{const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,pal[0]);g.addColorStop(.6,pal[1]);g.addColorStop(1,'#000');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    // decorative: moon + dunes + stars
+    ctx.fillStyle='rgba(255,255,255,.85)';for(let i=0;i<70;i++){ctx.globalAlpha=Math.random()*.8;ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H*.55,Math.random()*2+.4,0,7);ctx.fill()}ctx.globalAlpha=1;
+    ctx.fillStyle=pal[2];ctx.globalAlpha=.9;ctx.beginPath();ctx.arc(W*.72,H*.26,70,0,7);ctx.fill();ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(W*.72,H*.26,100,0,7);ctx.fill();ctx.globalAlpha=1;
+    ctx.fillStyle='rgba(0,0,0,.5)';ctx.beginPath();ctx.moveTo(0,H*.72);for(let x=0;x<=W;x+=20)ctx.lineTo(x,H*.72+Math.sin(x/60)*26);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
+  }
+  // frame
+  ctx.strokeStyle=pal[2];ctx.lineWidth=6;ctx.strokeRect(22,22,W-44,H-44);
+  ctx.lineWidth=1.5;ctx.globalAlpha=.7;ctx.strokeRect(36,36,W-72,H-72);ctx.globalAlpha=1;
+  // genre
+  ctx.fillStyle=pal[2];ctx.font='bold 26px Tajawal';ctx.textAlign='center';
+  ctx.fillText('✦ '+$('cGenre').value+' ✦',W/2,110);
+  // title
+  const title=$('cTitle').value||'عنوان الكتاب';
+  ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=18;
+  let size=64;ctx.font=`bold ${size}px Amiri`;
+  while(ctx.measureText(title).width>W-140&&size>28){size-=4;ctx.font=`bold ${size}px Amiri`}
+  const words=title.split(' ');let lines=[''];
+  if(ctx.measureText(title).width>W-140){title.split(' ').forEach(w=>{const last=lines[lines.length-1];if(ctx.measureText((last+' '+w).trim()).width>W-160)lines.push(w);else lines[lines.length-1]=(last+' '+w).trim()})}else lines=[title];
+  lines.forEach((ln,i)=>ctx.fillText(ln,W/2,H*.46+i*(size+12)));
+  ctx.shadowBlur=0;
+  // divider
+  ctx.fillStyle=pal[2];ctx.fillRect(W/2-70,H*.46+lines.length*(size+12)+10,140,3);
+  // author
+  ctx.font='bold 30px Tajawal';ctx.fillStyle=pal[2]==='#fff3d6'||pal[2]==='#e9ffe9'||pal[2]==='#d8fbff'?'#fff':pal[2];
+  ctx.fillText($('cAuthor').value||'',W/2,H-110);
+  ctx.font='20px Tajawal';ctx.globalAlpha=.8;ctx.fillStyle='#fff';ctx.fillText('رواية',W/2,H-75);ctx.globalAlpha=1;
+}
+function downloadCover(){const a=document.createElement('a');a.download=(($('cTitle').value||'cover').replace(/\s+/g,'_'))+'.png';a.href=$('coverCanvas').toDataURL('image/png');a.click();toast('تم تحميل الغلاف ⬇️')}
+// ---------- reminders ----------
+function askNotify(){if(!('Notification' in window))return toast('متصفحك لا يدعم الإشعارات');Notification.requestPermission().then(p=>toast(p==='granted'?'تم تفعيل الإشعارات 🔔':'تم رفض الإشعارات'))}
+function notify(t,b){if('Notification' in window&&Notification.permission==='granted'){try{new Notification(t,{body:b})}catch{}} }
+function addReminder(){const t=$('remTime').value;if(!t)return toast('اختر الوقت');reminders.push({time:t,day:$('remDay').value,msg:$('remMsg').value||'حان وقت الكتابة ✍️',done:false});store.set('reminders',reminders);renderRem();toast('تمت إضافة التذكير ⏰')}
+function renderRem(){const el=$('remList');if(!reminders.length){el.innerHTML='<p class="desc" style="margin-top:8px">لا توجد تذكيرات بعد.</p>';return}el.innerHTML=reminders.map((r,i)=>`<div class="rem-item"><input type="checkbox" ${r.done?'checked':''} onchange="toggleRem(${i})"><div style="flex:1"><b>🕐 ${r.time}</b> — ${esc(r.day)}<br><small style="color:var(--muted)">${esc(r.msg)}</small></div><button class="fix-btn" onclick="delRem(${i})">حذف</button></div>`).join('')}
+function toggleRem(i){reminders[i].done=!reminders[i].done;store.set('reminders',reminders)}
+function delRem(i){reminders.splice(i,1);store.set('reminders',reminders);renderRem()}
+function testRemind(){beep();notify('مِداد ✍️','حان وقت كتابتك اليومية!');note('remNotice','هذا مثال للتنبيه: صوت + إشعار + رسالة. اترك الصفحة مفتوحة في الخلفية ليعمل التذكير.');toast('🔔 حان وقت كتابتك اليومية!')}
+setInterval(()=>{const now=new Date();const hh=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');reminders.forEach(r=>{const key='midad_fired_'+hh+'_'+r.time;if(r.time===hh&&!sessionStorage.getItem(key)){sessionStorage.setItem(key,'1');if(!r.done){beep();notify('مِداد ✍️',r.msg);toast('⏰ '+r.msg)}}})},20000);
+// week dots
+function renderWeek(){const el=$('weekDots');el.innerHTML='';for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10);const on=!!days[k];const div=document.createElement('div');div.style.cssText=`width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:12px;border:1px solid var(--line);background:${on?'linear-gradient(135deg,var(--gold),#b98a2e);color:#191204;font-weight:800':'rgba(255,255,255,.05);color:var(--muted)'}`;div.textContent=d.toLocaleDateString('ar',{weekday:'short'});div.title=k+(on?' ✅ كتبت':' — لم تكتب');el.appendChild(div)}}
+// init
+$('pvDate').textContent=new Date().toLocaleDateString('ar');
+renderSessions();renderWorks();renderRem();renderWeek();updateCounts();updateReview();drawCover();newQuote();
+setInterval(renderWeek,60000);
+</script>
+</body>
+</html>
