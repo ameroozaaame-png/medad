@@ -107,6 +107,26 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:26px}
   nav.links.open{display:flex}
   .menu-btn{display:block}
 }
+#themeBtn{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:18px;cursor:pointer;color:var(--cream)}
+body.light{background:#f1ebdb;color:#2b2540}
+body.light header{background:rgba(255,253,246,.92)}
+body.light nav.links button,body.light #themeBtn,body.light .menu-btn{color:#2b2540}
+body.light nav.links{background:#fffdf6}
+body.light .hero-card{background:linear-gradient(135deg,#fffdf6,#f1e6cb);color:#2b2540}
+body.light .hero-card p{color:#57516f}
+body.light .card{background:#fffdf6;color:#2b2540}
+body.light .card p.desc,body.light .stat span,body.light footer{color:#6f6889}
+body.light input,body.light select,body.light textarea{background:#ffffff;color:#2b2540;border-color:#d9c69c}
+body.light .toolbar button,body.light .icon-btn,body.light .btn-ghost{background:#ffffff;color:#2b2540;border-color:#d9c69c}
+body.light .tabs button{background:#ffffff;color:#2b2540}
+body.light .pill{background:#f4ecd7;color:#2b2540}
+body.light .work,body.light .rem-item{background:#ffffff}
+body.light .stat{background:#f4ecd7}
+body.light .quote-box{background:rgba(180,140,60,.12);color:#2b2540}
+body.light .badge{color:#7a5c14;background:rgba(180,140,60,.16)}
+body.light .toast{background:#fffdf6;color:#2b2540}
+body.light .logo small{color:#6f6889}
+body.light #pFixed{background:#0c1a15!important;color:#d9ffec}
 @media print{
   header,.tabs,.no-print{display:none!important}
   body{background:#fff;color:#000}
@@ -119,6 +139,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:26px}
 <header>
   <div class="nav">
     <div class="logo"><div class="logo-mark">م</div><div>مِداد<small>رفيقك في كتابة الروايات والقصص</small></div></div>
+    <button id="themeBtn" onclick="toggleTheme()" title="تبديل المظهر فاتح / داكن">🌙</button>
     <button class="menu-btn" onclick="document.getElementById('topLinks').classList.toggle('open')">☰</button>
     <nav class="links" id="topLinks">
       <button class="active" data-tab="daily">✍️ الكتابة اليومية</button>
@@ -326,10 +347,24 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:26px}
             <div><label class="lbl">النوع الأدبي</label><select id="cGenre" onchange="drawCover()"><option>رواية درامية</option><option>فانتازيا</option><option>رعب وتشويق</option><option>رومانسي</option><option>خيال علمي</option><option>قصة أطفال</option><option>تاريخي</option></select></div>
             <div><label class="lbl">نمط الغلاف</label><select id="cStyle" onchange="drawCover()"><option value="night">ليل سينمائي 🌙</option><option value="desert">صحراء ذهبية 🏜️</option><option value="sea">بحر عميق 🌊</option><option value="forest">غابة غامضة 🌲</option><option value="royal">ملكي فاخر 👑</option><option value="minimal">بسيط أنيق 🤍</option></select></div>
           </div>
-          <label class="lbl">وصف صورة الذكاء الاصطناعي (اختياري — لتوليد صورة واقعية)</label>
-          <input id="cPrompt" placeholder="مثال: قصر عربي قديم فوق جبل تحت قمر كبير وضباب">
+          <label class="lbl">مشهد الغلاف — اختر مشهدًا جاهزًا أو اكتب وصفك بالعربية</label>
+          <select id="cScene">
+            <option value="">✍️ وصف خاص (اكتبه في الخانة التالية)</option>
+            <option value="old arabic palace on a high mountain under a giant full moon, fog">🏰 قصر عربي فوق جبل تحت قمر عملاق</option>
+            <option value="ancient arabic old city at sunset with minarets">🕌 مدينة عربية قديمة وقت الغروب</option>
+            <option value="ship in a stormy dark sea, huge waves and lightning">🌊 سفينة في بحر عاصف</option>
+            <option value="dragon flying over a dark castle at night, fire">🐉 تنين فوق قلعة ليلًا</option>
+            <option value="lonely tent in a golden desert under a starry night sky">🏜️ خيمة في صحراء ليلية</option>
+            <option value="mysterious dark forest with fog">🌲 غابة غامضة وضباب</option>
+            <option value="futuristic arabic city">🚀 مدينة مستقبلية</option>
+            <option value="sword stuck in stone on a snowy mountain">⚔️ سيف في جبل ثلجي</option>
+          </select>
+          <input id="cPrompt" placeholder="مثال: قصر قديم فوق جبل تحت قمر كبير وضباب" style="margin-top:8px" oninput="if(this.value.trim())$('cScene').value=''">
+          <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;cursor:pointer"><input type="checkbox" id="cChar" style="width:18px;height:18px;accent-color:#d4af6a"> 🧑 تضمين شخصية / وجه على الغلاف</label>
           <div class="cta-row" style="margin-top:10px">
             <button class="btn btn-ghost" onclick="aiImage()">🤖 توليد صورة AI للخلفية</button>
+            <button class="btn btn-ghost" onclick="previewTranslation()">🔍 معاينة الترجمة</button>
+            <button class="btn btn-ghost" onclick="copyPrompt()">📋 نسخ الأمر الإنجليزي</button>
             <button class="btn btn-ghost" onclick="document.getElementById('cBg').click()">🖼️ رفع صورة خلفية</button>
             <input type="file" id="cBg" accept="image/*" hidden onchange="loadBg(event)">
           </div>
@@ -379,6 +414,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:26px}
 const $=id=>document.getElementById(id);
 const store={get:(k,d)=>{try{const v=localStorage.getItem('midad_'+k);return v?JSON.parse(v):d}catch{return d}},set:(k,v)=>localStorage.setItem('midad_'+k,JSON.stringify(v))};
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600)}
+function toggleTheme(){document.body.classList.toggle('light');const l=document.body.classList.contains('light');store.set('theme',l?'light':'dark');$('themeBtn').textContent=l?'☀️':'🌙';toast(l?'تم تفعيل المظهر الفاتح ☀️':'تم تفعيل المظهر الداكن 🌙')}
 function goTab(name){document.querySelectorAll('#tabs button, #topLinks button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('section.panel').forEach(p=>p.classList.remove('active'));$('p-'+name).classList.add('active');$('topLinks').classList.remove('open');window.scrollTo({top:document.getElementById('tabs').offsetTop-80,behavior:'smooth'})}
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>goTab(b.dataset.tab));
 const quotes=["الرواية العظيمة تبدأ بجملة واحدة صادقة.","لا تنتظر الإلهام، ابدأ الكتابة وسيأتي الإلهام.","الفصل السيئ قابل للإصلاح، والصفحة البيضاء ليست كذلك.","اكتب بقلبك، وراجع بعقل ناشر.","القارئ ينسى الحبكة، لكنه لا ينسى الشعور.","ألف كلمة يوميًا تصنع رواية في ثلاثة أشهر."];
@@ -418,7 +454,7 @@ function insertWrap(a,b){const t=$('dText');const s=t.selectionStart,e=t.selecti
 function insertLine(txt){const t=$('dText');t.value+=(t.value?'\n':'')+txt+'\n';t.focus();updateCounts()}
 // timer
 let timerInt=null,tLeft=25*60;
-function toggleTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;$('timerBtn').textContent='▶️ مؤقت 25 دقيقة';tLeft=25*60;$('timerTxt').textContent='25:00';return}timerInt=setInterval(()=>{tLeft--;const m=String(Math.floor(tLeft/60)).padStart(2,'0'),s=String(tLeft%60).padStart(2,'0');$('timerTxt').textContent=m+':'+s;if(tLeft<=0){clearInterval(timerInt);timerInt=null;beep();toast('انتهت جلسة التركيز! استرح 5 دقائق ☕');notify('مِداد','انتهت جلسة الكتابة 🎉')} },1000);$('timerBtn').textContent='⏸️ إيقاف المؤقت';toast('بدأت جلسة التركيز 🍅')}
+function toggleTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;$('timerBtn').textContent='▶️ مؤقت 25 دقيقة';tLeft=25*60;$('timerTxt').textContent='25:00';return}timerInt=setInterval(()=>{tLeft--;const m=String(Math.floor(tLeft/60)).padStart(2,'0'),s=String(tLeft%60).padStart(2,'0');$('timerTxt').textContent=m+':'+s;if(tLeft<=0){clearInterval(timerInt);timerInt=null;beep();toast('انتهت جلسة التركيز! استرح 5 دقائق ☕');notify('مِداد','انتهت جلسة الكتابة 🎉')} },1000);tLeft=25*60;$('timerTxt').textContent='25:00';$('timerBtn').textContent='⏸️ إيقاف المؤقت';toast('بدأت جلسة التركيز 🍅')}
 function beep(){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;g.gain.value=.15;o.start();setTimeout(()=>{o.stop();ctx.close()},1200)}catch{}}
 // ---------- finished ----------
 function addFinished(){const t=$('fTitle').value.trim();if(!t)return toast('اكتب عنوان العمل أولًا');works.unshift({title:t,type:$('fType').value,status:$('fStatus').value,text:$('fText').value,date:new Date().toLocaleString('ar')});store.set('works',works);$('fTitle').value='';$('fText').value='';renderWorks();updateCounts();toast('أُضيف العمل ✅')}
@@ -491,7 +527,76 @@ function useFixed(){$('rText').value=$('pFixed').value||$('pText').value;goTab('
 let bgImg=null;
 const PALETTES={night:['#0b1026','#3b2f6e','#d4af6a'],desert:['#3a1f0d','#c98a2d','#fff3d6'],sea:['#022a3a','#0e7c8a','#d8fbff'],forest:['#0a2417','#1f7a4d','#e9ffe9'],royal:['#1c0f2e','#7c1d3f','#f0d9a8'],minimal:['#f5efe2','#2b2b2b','#b98a2e']};
 function loadBg(e){const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{bgImg=img;drawCover()};img.src=URL.createObjectURL(f)}
-function aiImage(){const p=$('cPrompt').value.trim()||(($('cGenre').value)+' arabic book cover art, dramatic, cinematic');note('coverNotice','جارٍ توليد صورة الذكاء الاصطناعي... 🤖');const img=new Image();img.crossOrigin='anonymous';img.onload=()=>{bgImg=img;drawCover();note('coverNotice','تم توليد صورة الغلاف بنجاح! ✨')};img.onerror=()=>note('coverNotice','تعذر التوليد (تحقق من الإنترنت) — يمكنك استخدام الأنماط الفنية الجاهزة.',true);img.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(p+' , book cover, no text')+'?width=600&height=900&seed='+Math.floor(Math.random()*9999)+'&nologo=true'}
+const AR2EN=[['قصر','palace'],['قلعة','castle'],['جبل','mountain'],['جبال','mountains'],['قمر','moon'],['شمس','sun'],['صحراء','desert'],['بحر','sea'],['غابة','forest'],['مدينة','city'],['قرية','village'],['نهر','river'],['سفينة','ship'],['تنين','dragon'],['سيف','sword'],['ضباب','fog'],['ليل','night'],['ليلية','night'],['غروب','sunset'],['نجوم','stars'],['سماء','sky'],['غيوم','clouds'],['ثلج','snow'],['ثلجي','snowy'],['نار','fire'],['شاطئ','beach'],['جزيرة','island'],['برج','tower'],['مسجد','mosque'],['سوق','market'],['خيمة','tent'],['جمل','camel'],['حصان','horse'],['ذئب','wolf'],['بومة','owl'],['قديم','old'],['قديمة','old'],['كبير','big'],['كبيرة','big'],['عملاق','giant'],['مظلم','dark'],['مظلمة','dark'],['عربي','arabic'],['عربية','arabic'],['فوق','above'],['تحت','under'],['وسط','in the middle of'],['حديقة','garden'],['ياسمين','jasmine'],['ورد','roses'],['ظلال','shadows'],['عاصف','stormy'],['غامضة','mysterious'],['مهجور','abandoned'],['مستقبلية','futuristic'],['فتاة','girl'],['فتى','boy'],['رجل','man'],['امرأة','woman'],['فارس','knight'],['ملك','king'],['ملكة','queen'],['أميرة','princess'],['طفل','child'],['عجوز','elderly man'],['ساحر','wizard'],['وجه','face'],['عيون','eyes'],['شعر','hair'],['شجر','tree'],['شجره','tree'],['صفصاف','willow'],['قبر','grave'],['قبور','graves'],['مقبره','cemetery'],['زهره','flower'],['ازهار','flowers'],['ورود','roses'],['امام','in front of'],['قرب','near'],['بجانب','beside'],['خلف','behind'],['داخل','inside'],['حول','around'],['بين','between'],['ذات','with'],['بعض','some'],['مع','with'],['في','in'],['من','from'],['على','on'],['علي','on'],['الي','to'],['صوره',''],['هذا',''],['هذه',''],['ذلك',''],['تلك',''],['التي',''],['الذي',''],['الذين',''],['احمر','red'],['حمراء','red'],['ازرق','blue'],['زرقاء','blue'],['اخضر','green'],['خضراء','green'],['اسود','black'],['سوداء','black'],['ابيض','white'],['بيضاء','white'],['ذهبي','golden'],['ذهبيه','golden'],['فضي','silver'],['بني','brown'],['رمادي','gray'],['وردي','pink'],['اشقر','blond'],['صغير','small'],['صغيره','small'],['جديد','new'],['جديده','new'],['طريق','road'],['باب','door'],['نافذه','window'],['جسر','bridge'],['هلال','crescent'],['شمعه','candle'],['مصباح','lamp'],['دخان','smoke'],['مراه','mirror'],['تاج','crown'],['عرش','throne'],['سجن','prison'],['كهف','cave'],['بئر','well'],['اسد','lion'],['نمر','tiger'],['ثعبان','snake'],['عقرب','scorpion'],['فراشه','butterfly'],['طائر','bird'],['حمامه','dove'],['غراب','crow'],['محارب','warrior'],['جندي','soldier'],['حزين','sad'],['سعيد','happy'],['خائف','scared'],['غامض','mysterious'],['جميل','beautiful'],['طويل','tall'],['قصير','short'],['قوي','strong'],['ضعيف','weak'],['سريع','fast'],['هادئ','calm'],['مطر','rain'],['عاصفه','storm'],['برق','lightning'],['رعد','thunder'],['رياح','wind'],['سحاب','clouds'],['موج','waves'],['امواج','waves'],['شلال','waterfall'],['بحيره','lake'],['وادي','valley'],['واحه','oasis'],['نخله','palm tree'],['رمل','sand'],['صخره','rock'],['ورقه','leaf'],['عشب','grass'],['كتاب','book'],['رساله','letter'],['خريطه','map'],['مفتاح','key'],['قفل','lock'],['صندوق','box'],['كنز','treasure'],['ذهب','gold'],['فضه','silver'],['سحر','magic'],['صباح','morning'],['مساء','evening'],['فجر','dawn'],['يقف','standing'],['يجلس','sitting'],['يطير','flying'],['يركض','running'],['يحمل','holding'],['ينظر','looking'],['يبكي','crying'],['يمشي','walking'],['يحلق','soaring']];
+function arNorm(w){return (w||'').replace(/[ً-ٲٰـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي')}
+const AR2EN_DICT={};AR2EN.forEach(([ar,en])=>{AR2EN_DICT[arNorm(ar)]=en});
+function arCands(t){
+  const out=[t],pre=[t];
+  if(t[0]==='و'&&t.length>3)pre.push(t.slice(1));
+  pre.forEach(p=>{out.push(p);
+    if(p.indexOf('ال')===0&&p.length>4)out.push(p.slice(2));
+    if(p.indexOf('لل')===0&&p.length>4)out.push(p.slice(2));});
+  const finals=[];
+  [...new Set(out)].forEach(b=>{finals.push(b);
+    ['ب','ل','ك'].forEach(pr=>{if(b[0]===pr&&b.length>3)finals.push(b.slice(1))});
+    ['هما','هم','هن','كما','كم','كن','نا','ني','ها','ه','ك','ي'].forEach(su=>{if(b.length-su.length>=3&&b.slice(-su.length)===su)finals.push(b.slice(0,-su.length))});
+    ['تان','تين','ان','ون','ين','ات'].forEach(su=>{if(b.length-su.length>=3&&b.slice(-su.length)===su)finals.push(b.slice(0,-su.length))});
+    if(b[b.length-1]==='ه'&&b.length>3)finals.push(b.slice(0,-1));});
+  return [...new Set(finals)];
+}
+function ar2en(text){
+  window._dropped=[];return (text||'').split(/\s+/).map(tok=>{
+    if(!/[\u0600-\u06FF]/.test(tok))return tok;
+    const t=arNorm(tok.replace(/[^\u0600-\u06FF]/g,''));
+    if(!t||t.length<2)return '';
+    if(t.length>4&&t.slice(-2)==='ان'&&AR2EN_DICT[t.slice(0,-2)]){const e=AR2EN_DICT[t.slice(0,-2)];const PL={man:'men',woman:'women',child:'children'};return 'two '+(PL[e]||(e+'s'))}
+    const c=arCands(t);
+    for(let i=0;i<c.length;i++){if(typeof AR2EN_DICT[c[i]]!=='undefined')return AR2EN_DICT[c[i]]}
+    (window._dropped=window._dropped||[]).push(tok);
+    return '';
+  }).filter(Boolean).join(' ').replace(/\s+/g,' ').trim();
+}
+const GENRE_EN={'رواية درامية':'dramatic literary fiction','فانتازيا':'epic fantasy','رعب وتشويق':'dark horror thriller','رومانسي':'romantic','خيال علمي':'science fiction','قصة أطفال':'children storybook','تاريخي':'historical epic'};
+const EN_ADJ={abandoned:1,old:1,big:1,giant:1,dark:1,red:1,blue:1,green:1,black:1,white:1,golden:1,brown:1,gray:1,pink:1,blond:1,small:1,new:1,stormy:1,mysterious:1,snowy:1,arabic:1,futuristic:1,sad:1,happy:1,scared:1,beautiful:1,tall:1,short:1,strong:1,weak:1,fast:1,calm:1,standing:1,sitting:1,flying:1,running:1,holding:1,looking:1,crying:1,walking:1,soaring:1,high:1,full:1,lonely:1};
+const EN_MOD={willow:1,jasmine:1,roses:1,palm:1,desert:1,mountain:1,mountains:1,sea:1,night:1,snow:1,gold:1,silver:1,stone:1,sand:1};
+const EN_NOUN={palace:1,castle:1,mountain:1,mountains:1,moon:1,sun:1,desert:1,sea:1,forest:1,city:1,village:1,river:1,ship:1,dragon:1,sword:1,tree:1,trees:1,flowers:1,flower:1,jasmine:1,girl:1,boy:1,man:1,men:1,woman:1,women:1,knight:1,king:1,queen:1,princess:1,child:1,children:1,wizard:1,warrior:1,face:1,eyes:1,hair:1,fog:1,night:1,sunset:1,stars:1,star:1,sky:1,clouds:1,snow:1,fire:1,beach:1,island:1,tower:1,mosque:1,market:1,tent:1,camel:1,horse:1,wolf:1,owl:1,garden:1,grave:1,graves:1,cemetery:1,road:1,door:1,window:1,bridge:1,crescent:1,candle:1,lamp:1,smoke:1,mirror:1,crown:1,throne:1,prison:1,cave:1,well:1,lion:1,tiger:1,snake:1,scorpion:1,butterfly:1,bird:1,dove:1,crow:1,soldier:1,rain:1,storm:1,lightning:1,thunder:1,wind:1,waves:1,waterfall:1,lake:1,valley:1,oasis:1,sand:1,rock:1,leaf:1,grass:1,book:1,letter:1,map:1,key:1,lock:1,box:1,treasure:1,gold:1,silver:1,magic:1,morning:1,evening:1,dawn:1,stone:1,willow:1,palm:1};
+function fixOrder(s){
+  const out=[];let grp=[];
+  const flush=()=>{if(!grp.length)return;
+    const nouns=grp.filter(w=>EN_NOUN[w.toLowerCase()]||EN_MOD[w.toLowerCase()]);
+    const adjs=grp.filter(w=>EN_ADJ[w.toLowerCase()]);
+    if(!nouns.length){out.push(...grp)}
+    else{let head,mods;
+      if(EN_MOD[nouns[0].toLowerCase()]&&nouns.length>1){head=nouns[nouns.length-1];mods=nouns.slice(0,-1)}
+      else{head=nouns[0];mods=nouns.slice(1)}
+      out.push(...adjs,...mods,head)}
+    grp=[]};
+  s.split(' ').forEach(w=>{const lw=w.toLowerCase();if(EN_ADJ[lw]||EN_NOUN[lw]||EN_MOD[lw])grp.push(w);else{flush();out.push(w)}});
+  flush();return out.join(' ');
+}
+function aiImage(){
+  window._dropped=[];
+  const sel=$('cScene')?$('cScene').value:'';
+  const user=$('cPrompt').value.trim();
+  const gEn=GENRE_EN[$('cGenre').value]||'literary fiction';
+  const typed=user?ar2en(user):'';
+  const scene=fixOrder(typed||sel||('middle eastern '+gEn+' landscape'));
+  const hasArabic=/[\u0600-\u06FF]/.test(scene);
+  let withChar=$('cChar')&&$('cChar').checked;
+  if(/\b(girl|boy|man|woman|knight|king|queen|princess|child|wizard|warrior|face|eyes|hair)\b/i.test(scene))withChar=true;
+  const full='Book cover illustration: '+scene+(hasArabic?' (middle eastern arabic atmosphere)':'')+', '+gEn+' style, cinematic lighting, complete scene with all described elements clearly visible, highly detailed, atmospheric'+(withChar?', expressive character portrait with detailed face':', wide scenic landscape, no people, no face, no portrait')+', no text, no words, no letters, no watermark';
+  const seed=Math.floor(Math.random()*999999);
+  window._lastFull=full;
+  const drop=(window._dropped||[]).filter((v,i,a)=>a.indexOf(v)===i);
+  note('coverNotice','تُرجِم وصفك إلى: '+scene+(drop.length?' — ⚠️ كلمات لم أفهمها، أعد صياغتها بكلمات أبسط: '+drop.join('، '):'')+' — جارٍ التوليد (20-60 ثانية) 🤖');
+  const img=new Image(); img.crossOrigin='anonymous'; let done=false;
+  const to=setTimeout(()=>{if(!done)note('coverNotice','التوليد بطيء... انتظر قليلًا أو أعد المحاولة.',true)},45000);
+  img.onload=()=>{done=true;clearTimeout(to);bgImg=img;drawCover();note('coverNotice','تم توليد صورة الغلاف من وصفك بنجاح! ✨ (بذرة: '+seed+')')};
+  img.onerror=()=>{done=true;clearTimeout(to);note('coverNotice','تعذر التوليد (تحقق من الإنترنت) — يمكنك استخدام الأنماط الفنية الجاهزة أو رفع صورة.',true)};
+  img.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(full)+'?width=768&height=1152&seed='+seed+'&nologo=true&model=flux';
+}
+function previewTranslation(){const u=$('cPrompt').value.trim();const sel=$('cScene')?$('cScene').value:'';if(!u&&!sel)return toast('اكتب وصفًا أو اختر مشهدًا');if(!u){note('coverNotice','المشهد المختار يُرسل كما هو بالإنجليزية: '+sel);return}window._dropped=[];const s=ar2en(u);const d=(window._dropped||[]).filter((v,i,a)=>a.indexOf(v)===i);note('coverNotice','الترجمة: '+(s||'— فارغة! كل الكلمات غير مفهومة')+(d.length?' — ⚠️ كلمات غير مفهومة: '+d.join('، '):' — ✅ كل الكلمات مفهومة'))}
+function copyPrompt(){if(!window._lastFull)return toast('ولّد صورة أولًا ثم انسخ الأمر');navigator.clipboard.writeText(window._lastFull).then(()=>toast('تم نسخ الأمر الإنجليزي 📋'))}
 function randomCover(){const styles=Object.keys(PALETTES);$('cStyle').value=styles[Math.floor(Math.random()*styles.length)];bgImg=null;drawCover()}
 function drawCover(){
   const cv=$('coverCanvas'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
@@ -526,7 +631,7 @@ function drawCover(){
   ctx.fillText($('cAuthor').value||'',W/2,H-110);
   ctx.font='20px Tajawal';ctx.globalAlpha=.8;ctx.fillStyle='#fff';ctx.fillText('رواية',W/2,H-75);ctx.globalAlpha=1;
 }
-function downloadCover(){const a=document.createElement('a');a.download=(($('cTitle').value||'cover').replace(/\s+/g,'_'))+'.png';a.href=$('coverCanvas').toDataURL('image/png');a.click();toast('تم تحميل الغلاف ⬇️')}
+function downloadCover(){try{const a=document.createElement('a');a.download=(($('cTitle').value||'cover').replace(/\s+/g,'_'))+'.png';a.href=$('coverCanvas').toDataURL('image/png');a.click();toast('تم تحميل الغلاف ⬇️')}catch(e){toast('تعذر التحميل المباشر لصورة AI — التقط لقطة شاشة للغلاف 📸');note('coverNotice','المتصفح منع تحميل الغلاف كملف بسبب حماية صورة الذكاء الاصطناعي. الحل: التقط لقطة شاشة، أو استخدم الأنماط الفنية الجاهزة ثم حمّل.',true)}}
 // ---------- reminders ----------
 function askNotify(){if(!('Notification' in window))return toast('متصفحك لا يدعم الإشعارات');Notification.requestPermission().then(p=>toast(p==='granted'?'تم تفعيل الإشعارات 🔔':'تم رفض الإشعارات'))}
 function notify(t,b){if('Notification' in window&&Notification.permission==='granted'){try{new Notification(t,{body:b})}catch{}} }
@@ -540,6 +645,7 @@ setInterval(()=>{const now=new Date();const hh=String(now.getHours()).padStart(2
 function renderWeek(){const el=$('weekDots');el.innerHTML='';for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10);const on=!!days[k];const div=document.createElement('div');div.style.cssText=`width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:12px;border:1px solid var(--line);background:${on?'linear-gradient(135deg,var(--gold),#b98a2e);color:#191204;font-weight:800':'rgba(255,255,255,.05);color:var(--muted)'}`;div.textContent=d.toLocaleDateString('ar',{weekday:'short'});div.title=k+(on?' ✅ كتبت':' — لم تكتب');el.appendChild(div)}}
 // init
 $('pvDate').textContent=new Date().toLocaleDateString('ar');
+if(store.get('theme','dark')==='light'){document.body.classList.add('light');$('themeBtn').textContent='☀️'}
 renderSessions();renderWorks();renderRem();renderWeek();updateCounts();updateReview();drawCover();newQuote();
 setInterval(renderWeek,60000);
 </script>
