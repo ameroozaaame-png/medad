@@ -1,0 +1,35 @@
+{
+  "name": "مِداد — منصة الكتابة العربية",
+  "short_name": "مِداد",
+  "description": "منصة عربية لكتابة الروايات والقصص: كتابة يومية، أعمال منتهية، مراجعة ونشر، تدقيق لغوي، غلاف بالذكاء الاصطناعي، تذكير بالكتابة.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f0d1a",
+  "theme_color": "#d4af6a",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["productivity", "education", "books"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "screenshot-wide.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "واجهة منصة مِداد على الحاسوب" },
+    { "src": "screenshot-narrow.png", "sizes": "720x1280", "type": "image/png", "form_factor": "narrow", "label": "واجهة منصة مِداد على الجوال" }
+  ],
+  "shortcuts": [
+    { "name": "كتابة جديدة", "short_name": "كتابة", "description": "ابدأ جلسة كتابة يومية", "url": "./index.html#daily", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "صمّم غلافًا", "short_name": "غلاف", "description": "أنشئ غلافًا بالذكاء الاصطناعي", "url": "./index.html#cover", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "أبرز المؤلفين", "short_name": "المؤلفون", "description": "تصفح ملفات المؤلفين", "url": "./authors.html", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "صفحة 2", "short_name": "صفحة 2", "description": "فتح صفحة 2", "url": "./page2.html", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  }
+}
